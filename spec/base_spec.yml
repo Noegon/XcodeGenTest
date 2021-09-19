@@ -1,0 +1,10 @@
+options:
+  bundleIdPrefix: com.noegon
+  postGenCommand: pod install
+  usesTabs: true
+targets:
+  MyFramework:
+    type: framework
+    deploymentTarget: "12.0"
+    platform: iOS
+    sources: [../MyFramework]
