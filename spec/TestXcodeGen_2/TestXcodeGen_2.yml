@@ -4,14 +4,11 @@ include:
   - ../base_spec.yml
   - TestXcodeGen_2_Main_target.yml
 
+  # Swift Packages
 packages:
   Yams:
     url: https://github.com/jpsim/Yams
-    from: 2.0.0
-
-    dependencies:
-      - target: MyFramework
-      - framework: ../../MyFramework.framework
-      - sdk: Contacts.framework
-      - sdk: libc++.tbd
-      - package: Yams
+    majorVersion: 2.0.0
+  SwiftPM:
+    url: https://github.com/apple/swift-package-manager
+    branch: swift-5.0-branch

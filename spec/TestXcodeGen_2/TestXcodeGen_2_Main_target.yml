@@ -11,11 +11,13 @@ targets:
         showEnvVars: true
         basedOnDependencyAnalysis: true
 
-    sources: [../../CommonFiles/SourceCode/TestXcodeGen_2]
+    sources: [../../CommonFiles/SourceCode/TestXcodeGen_2,
+              ../../Resources/TestXcodeGen_2]
 
     info:
       path: ../../MainProjectData/TestXcodeGen_2/Info.plist
       properties:
+        TEST_PROPERTY: "test_1"
         UISupportedInterfaceOrientations: [UIInterfaceOrientationPortrait]
         UILaunchStoryboardName: LaunchScreen
 
@@ -34,3 +36,10 @@ targets:
         release:
           DEVELOPMENT_TEAM: "9M22BH66EU"
           CUSTOM_BUILD_SETTING: my_release_value
+
+    dependencies:
+      - target: MyFramework
+      - framework: ../../MyFramework.framework
+      - sdk: Contacts.framework
+      - sdk: libc++.tbd
+      - package: Yams

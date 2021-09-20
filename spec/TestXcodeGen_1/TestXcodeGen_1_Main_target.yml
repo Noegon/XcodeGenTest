@@ -14,6 +14,7 @@ targets:
     info:
       path: ../../MainProjectData/TestXcodeGen_1/Info.plist
       properties:
+        TEST_PROPERTY: "test_2"
         UISupportedInterfaceOrientations: [UIInterfaceOrientationPortrait]
         UILaunchStoryboardName: LaunchScreen
 
@@ -22,7 +23,8 @@ targets:
       properties:
         com.apple.security.application-groups: ["group.com.TestXcodeGen_1"]
 
-    sources: [../../CommonFiles/SourceCode/TestXcodeGen_1]
+    sources: [../../CommonFiles/SourceCode/TestXcodeGen_1,
+              ../../Resources/TestXcodeGen_1]
 
     settings:
       INFOPLIST_FILE: ../../MainProjectData/TestXcodeGen_1/Info.plist
@@ -34,3 +36,21 @@ targets:
         release:
           DEVELOPMENT_TEAM: "9M22BH66EU"
           CUSTOM_BUILD_SETTING: my_release_value
+
+    dependencies:
+      - target: MyFramework
+      - framework: ../../MyFramework.framework
+      - sdk: UserNotifications.framework
+      - sdk: Accelerate.framework
+      - sdk: LocalAuthenticattion.framework
+      - sdk: Security.framework
+      - sdk: StoreKit.framework
+      - sdk: Social.framework
+      - sdk: Intents.framework
+      - sdk: IntentsUI.framework
+      - sdk: UIKit.framework
+      - sdk: CoreGraphics.framework
+      - sdk: MapKit.framework
+      - sdk: libc++.tbd
+      - sdk: libxml2.2.dylib
+      - package: Yams

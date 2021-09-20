@@ -1,13 +1,17 @@
 name: base_spec
+
 options:
   bundleIdPrefix: com.noegon
   postGenCommand: pod install
   usesTabs: true
+
+# Independent targets, common for all projects
 targets:
   MyFramework:
     platform: iOS
     deploymentTarget: "12.0"
     type: framework
+
     settings:
       INFOPLIST_FILE: ../MyFramework/Info.plist
       PRODUCT_BUNDLE_IDENTIFIER: com.noegon.MyFramework
@@ -16,10 +20,11 @@ targets:
           DEVELOPMENT_TEAM: "9M22BH66EU"
         release:
           DEVELOPMENT_TEAM: "9M22BH66EU"
+
     sources:
       - path: ../MyFramework
         excludes:
-          # - "Info.plist"
           - "*-Private.h"
+
     info:
       path: ../MyFramework/Info.plist
