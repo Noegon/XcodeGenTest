@@ -1,0 +1,40 @@
+# Uncomment the next line to define a global platform for your project
+platform :ios, '11.0'
+install! 'cocoapods', :disable_input_output_paths => true
+
+# def remote_desktop
+#   pod 'XMLDictionary'
+#   pod 'Stencil'
+#   pod 'SwiftyXMLParser'
+# end
+
+# def intercom
+#   pod 'Intercom'
+# end
+
+# def html_editor
+#   pod 'RichEditorView', :git => 'https://github.com/cbess/RichEditorView.git', :commit => '72e04d7'
+#   pod 'R.swift'
+# end
+
+# def ticketing
+#   pod 'Toast-Swift', '~> 5.0.1'
+#   pod 'SDWebImage', '~> 5.0'
+#   pod 'EasyWebView', :git => 'https://github.com/pulseway/EasyWebView.git'
+#   pod 'HSAttachmentPicker',  '~> 1.0.11'
+#   pod 'NVActivityIndicatorView', '~> 4.8.0'
+# end
+
+target 'TestXcodeGen_2' do
+  # intercom
+  # remote_desktop
+  # html_editor
+  # ticketing
+  
+  pod 'GDPerformanceView-Swift'
+  pod 'SnapKit'
+  pod 'SwiftTweaks', :git => 'https://github.com/Khan/SwiftTweaks.git', :branch => 'master'
+  pod 'DifferenceKit'
+  pod 'AwesomeEnum', :git => 'https://github.com/pulseway/Awesome'
+  pod 'CorePlot', :git => 'https://github.com/core-plot/core-plot.git', :branch => 'release-2.3'
+end

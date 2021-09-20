@@ -1,0 +1,11 @@
+# Basic utilities
+brew 'git'
+brew 'openssl'
+
+# Code formatting utilities
+brew 'clang-format'
+brew 'swiftformat'
+
+# Ruby version management and installation
+brew 'rbenv'
+brew 'ruby-build'

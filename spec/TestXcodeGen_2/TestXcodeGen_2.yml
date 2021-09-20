@@ -1,33 +1,17 @@
 name: TestXcodeGen_2
+
 include:
   - ../base_spec.yml
-# options:
-#   bundleIdPrefix: com.noegon
-#   postGenCommand: pod install
-#   usesTabs: true
+  - TestXcodeGen_2_Main_target.yml
+
 packages:
   Yams:
     url: https://github.com/jpsim/Yams
     from: 2.0.0
-targets:
-  TestXcodeGen_2:
-    type: application
-    platform: iOS
-    deploymentTarget: "12.0"
-    sources: [../../SourceCode/TestXcodeGen_2]
-    settings:
-      configs:
-        debug:
-          CUSTOM_BUILD_SETTING: my_debug_value
-        release:
-          CUSTOM_BUILD_SETTING: my_release_value
+
     dependencies:
       - target: MyFramework
       - framework: ../../MyFramework.framework
       - sdk: Contacts.framework
       - sdk: libc++.tbd
       - package: Yams
-  # MyFramework:
-  #   type: framework
-  #   platform: iOS
-  #   sources: [../../MyFramework]

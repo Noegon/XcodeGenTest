@@ -1,0 +1,36 @@
+name: TestXcodeGen_1_Main_target
+targets:
+  TestXcodeGen_1:
+    type: application
+    platform: iOS
+    deploymentTarget: "12.0"
+
+    preBuildScripts:
+      - path: ../../scripts/CodeFormatting.sh
+        name: Code Formatting
+        showEnvVars: true
+        basedOnDependencyAnalysis: true
+  
+    info:
+      path: ../../MainProjectData/TestXcodeGen_1/Info.plist
+      properties:
+        UISupportedInterfaceOrientations: [UIInterfaceOrientationPortrait]
+        UILaunchStoryboardName: LaunchScreen
+
+    entitlements:
+      path: ../../MainProjectData/TestXcodeGen_1/TestXcodeGen_1.entitlements
+      properties:
+        com.apple.security.application-groups: ["group.com.TestXcodeGen_1"]
+
+    sources: [../../CommonFiles/SourceCode/TestXcodeGen_1]
+
+    settings:
+      INFOPLIST_FILE: ../../MainProjectData/TestXcodeGen_1/Info.plist
+      PRODUCT_BUNDLE_IDENTIFIER: com.noegon.TestXcodeGen_1
+      configs:
+        debug:
+          DEVELOPMENT_TEAM: "9M22BH66EU"
+          CUSTOM_BUILD_SETTING: my_debug_value
+        release:
+          DEVELOPMENT_TEAM: "9M22BH66EU"
+          CUSTOM_BUILD_SETTING: my_release_value
