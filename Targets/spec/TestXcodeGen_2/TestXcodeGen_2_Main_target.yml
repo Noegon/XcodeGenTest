@@ -1,6 +1,8 @@
 name: TestXcodeGen_2_Main_target
+
 targets:
   TestXcodeGen_2:
+    name: TestXcodeGen_2
     type: application
     platform: iOS
     deploymentTarget: "12.0"
@@ -11,36 +13,40 @@ targets:
         showEnvVars: true
         basedOnDependencyAnalysis: true
 
-    sources: [../../CommonFiles/SourceCode/TestXcodeGen_2,
-              ../../Resources/TestXcodeGen_2]
-
     info:
-      path: ../../MainProjectData/TestXcodeGen_2/Info.plist
+      path: ../../../Targets/TestXcodeGen_2/MainProjectData/Info.plist
       properties:
         TEST_PROPERTY: "test_2"
         UISupportedInterfaceOrientations: [UIInterfaceOrientationPortrait]
         UILaunchStoryboardName: LaunchScreen
         UIApplicationSceneManifest: {
-          "Enable Multiple Windows": false,
-          "Scene Configuration": {
-            "Application Session Role" : [
+          UIApplicationSupportsMultipleScenes: false,
+          UISceneConfigurations: {
+            UIWindowSceneSessionRoleApplication: [
               {
-                "Configuration Name": "Default Configuration",
-                "Delegate Class Name": $(PRODUCT_MODULE_NAME).SceneDelegate,
-                "Storyboard Name": "Main.storyboard"
+                UISceneClassName: "",
+                UISceneConfigurationName: Default Configuration,
+                UISceneDelegateClassName: $(PRODUCT_MODULE_NAME).SceneDelegate,
+                UISceneStoryboardFile: Main
               }
             ]
           }
         }
 
     entitlements:
-      path: ../../MainProjectData/TestXcodeGen_2/TestXcodeGen_2.entitlements
+      path: ../../../Targets/TestXcodeGen_2/MainProjectData/TestXcodeGen_2.entitlements
       properties:
         com.apple.security.application-groups: ["group.com.TestXcodeGen_2"]
 
+    sources: [../../../Targets/TestXcodeGen_2/SourceCode,
+              ../../../Targets/TestXcodeGen_2/Resources]
+
     settings:
-      INFOPLIST_FILE: ../../MainProjectData/TestXcodeGen_2/Info.plist
-      PRODUCT_BUNDLE_IDENTIFIER: com.noegon.TestXcodeGen-22
+      base:
+        PRODUCT_NAME: TestXcodeGen_2
+        INFOPLIST_FILE: ${SRCROOT}/Info.plist
+        CODE_SIGN_ENTITLEMENTS: ${SRCROOT}/TestXcodeGen_2.entitlements
+        PRODUCT_BUNDLE_IDENTIFIER: "com.noegon.TestXcodeGen-22"
       configs:
         debug:
           DEVELOPMENT_TEAM: "9M22BH66EU"
@@ -49,9 +55,9 @@ targets:
           DEVELOPMENT_TEAM: "9M22BH66EU"
           CUSTOM_BUILD_SETTING: my_release_value
 
+    requiresObjCLinking: true
+
     dependencies:
       - target: MyFramework
-      - framework: ../../MyFramework.framework
       - sdk: Contacts.framework
       - sdk: libc++.tbd
-      - package: Yams

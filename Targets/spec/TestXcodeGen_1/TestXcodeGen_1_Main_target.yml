@@ -1,18 +1,19 @@
 name: TestXcodeGen_1_Main_target
 targets:
   TestXcodeGen_1:
+    name: TestXcodeGen_1
     type: application
     platform: iOS
     deploymentTarget: "13.0"
 
     preBuildScripts:
-      - path: ../../scripts/CodeFormatting.sh
+      - path: ../../../scripts/CodeFormatting.sh
         name: Code Formatting
         showEnvVars: true
         basedOnDependencyAnalysis: true
   
     info:
-      path: ../../MainProjectData/TestXcodeGen_1/Info.plist
+      path: ../../../Targets/TestXcodeGen_1/MainProjectData/Info.plist
       properties:
         TEST_PROPERTY: "test_1"
         UISupportedInterfaceOrientations: [UIInterfaceOrientationPortrait]
@@ -32,16 +33,19 @@ targets:
         }
 
     entitlements:
-      path: ../../MainProjectData/TestXcodeGen_1/TestXcodeGen_1.entitlements
+      path: ../../../Targets/TestXcodeGen_1/MainProjectData/TestXcodeGen_1.entitlements
       properties:
         com.apple.security.application-groups: ["group.com.TestXcodeGen_1"]
 
-    sources: [../../CommonFiles/SourceCode/TestXcodeGen_1,
-              ../../Resources/TestXcodeGen_1]
+    sources: [../../../Targets/TestXcodeGen_1/SourceCode,
+              ../../../Targets/TestXcodeGen_1/Resources]
 
     settings:
-      INFOPLIST_FILE: ../../MainProjectData/TestXcodeGen_1/Info.plist
-      PRODUCT_BUNDLE_IDENTIFIER: com.noegon.TestXcodeGen-11
+      base:
+        PRODUCT_NAME: TestXcodeGen_1
+        INFOPLIST_FILE: ${SRCROOT}/Info.plist
+        CODE_SIGN_ENTITLEMENTS: ${SRCROOT}/TestXcodeGen_1.entitlements
+        PRODUCT_BUNDLE_IDENTIFIER: "com.noegon.TestXcodeGen-11"
       configs:
         debug:
           DEVELOPMENT_TEAM: "9M22BH66EU"
@@ -49,10 +53,11 @@ targets:
         release:
           DEVELOPMENT_TEAM: "9M22BH66EU"
           CUSTOM_BUILD_SETTING: my_release_value
+    
+    requiresObjCLinking: true
 
     dependencies:
       - target: MyFramework
-      # - framework: ../../MyFramework.framework
       - sdk: UserNotifications.framework
       - sdk: Accelerate.framework
       - sdk: LocalAuthentication.framework
@@ -66,4 +71,3 @@ targets:
       - sdk: MapKit.framework
       - sdk: libc++.tbd
       - sdk: libxml2.2.dylib
-      # - package: Yams

@@ -13,7 +13,7 @@ targets:
     type: framework
 
     settings:
-      INFOPLIST_FILE: ../MyFramework/Info.plist
+      INFOPLIST_FILE: ../../CommonResources/MyFramework/Info.plist
       PRODUCT_BUNDLE_IDENTIFIER: com.noegon.MyFramework
       configs:
         debug:
@@ -22,9 +22,9 @@ targets:
           DEVELOPMENT_TEAM: "9M22BH66EU"
 
     sources:
-      - path: ../MyFramework
+      - path: ../../CommonResources/MyFramework
         excludes:
           - "*-Private.h"
 
     info:
-      path: ../MyFramework/Info.plist
+      path: ../../CommonResources/MyFramework/Info.plist
