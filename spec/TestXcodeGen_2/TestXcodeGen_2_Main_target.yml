@@ -17,9 +17,21 @@ targets:
     info:
       path: ../../MainProjectData/TestXcodeGen_2/Info.plist
       properties:
-        TEST_PROPERTY: "test_1"
+        TEST_PROPERTY: "test_2"
         UISupportedInterfaceOrientations: [UIInterfaceOrientationPortrait]
         UILaunchStoryboardName: LaunchScreen
+        UIApplicationSceneManifest: {
+          "Enable Multiple Windows": false,
+          "Scene Configuration": {
+            "Application Session Role" : [
+              {
+                "Configuration Name": "Default Configuration",
+                "Delegate Class Name": $(PRODUCT_MODULE_NAME).SceneDelegate,
+                "Storyboard Name": "Main.storyboard"
+              }
+            ]
+          }
+        }
 
     entitlements:
       path: ../../MainProjectData/TestXcodeGen_2/TestXcodeGen_2.entitlements
@@ -28,7 +40,7 @@ targets:
 
     settings:
       INFOPLIST_FILE: ../../MainProjectData/TestXcodeGen_2/Info.plist
-      PRODUCT_BUNDLE_IDENTIFIER: com.noegon.TestXcodeGen_2
+      PRODUCT_BUNDLE_IDENTIFIER: com.noegon.TestXcodeGen-22
       configs:
         debug:
           DEVELOPMENT_TEAM: "9M22BH66EU"

@@ -3,7 +3,7 @@ targets:
   TestXcodeGen_1:
     type: application
     platform: iOS
-    deploymentTarget: "12.0"
+    deploymentTarget: "13.0"
 
     preBuildScripts:
       - path: ../../scripts/CodeFormatting.sh
@@ -14,9 +14,22 @@ targets:
     info:
       path: ../../MainProjectData/TestXcodeGen_1/Info.plist
       properties:
-        TEST_PROPERTY: "test_2"
+        TEST_PROPERTY: "test_1"
         UISupportedInterfaceOrientations: [UIInterfaceOrientationPortrait]
         UILaunchStoryboardName: LaunchScreen
+        UIApplicationSceneManifest: {
+          UIApplicationSupportsMultipleScenes: false,
+          UISceneConfigurations: {
+            UIWindowSceneSessionRoleApplication: [
+              {
+                UISceneClassName: "",
+                UISceneConfigurationName: Default Configuration,
+                UISceneDelegateClassName: $(PRODUCT_MODULE_NAME).SceneDelegate,
+                UISceneStoryboardFile: Main
+              }
+            ]
+          }
+        }
 
     entitlements:
       path: ../../MainProjectData/TestXcodeGen_1/TestXcodeGen_1.entitlements
@@ -28,7 +41,7 @@ targets:
 
     settings:
       INFOPLIST_FILE: ../../MainProjectData/TestXcodeGen_1/Info.plist
-      PRODUCT_BUNDLE_IDENTIFIER: com.noegon.TestXcodeGen_1
+      PRODUCT_BUNDLE_IDENTIFIER: com.noegon.TestXcodeGen-11
       configs:
         debug:
           DEVELOPMENT_TEAM: "9M22BH66EU"
@@ -39,10 +52,10 @@ targets:
 
     dependencies:
       - target: MyFramework
-      - framework: ../../MyFramework.framework
+      # - framework: ../../MyFramework.framework
       - sdk: UserNotifications.framework
       - sdk: Accelerate.framework
-      - sdk: LocalAuthenticattion.framework
+      - sdk: LocalAuthentication.framework
       - sdk: Security.framework
       - sdk: StoreKit.framework
       - sdk: Social.framework
@@ -53,4 +66,4 @@ targets:
       - sdk: MapKit.framework
       - sdk: libc++.tbd
       - sdk: libxml2.2.dylib
-      - package: Yams
+      # - package: Yams
