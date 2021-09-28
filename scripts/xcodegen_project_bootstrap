@@ -1,0 +1,6 @@
+#! /bin/bash
+
+brew install xcodegen
+
+cd ../
+xcodegen generate --spec Targets/spec/TestXcodeGen_1/TestXcodeGen_1.yml --project Targets/TestXcodeGen_1/MainProjectData
