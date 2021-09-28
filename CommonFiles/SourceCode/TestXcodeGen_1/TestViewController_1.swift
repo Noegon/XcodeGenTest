@@ -1,7 +1,6 @@
 import UIKit
 import MyFramework
 
-
 class ComputersSectionGenerator {
 	static var sections: [OrganizationSection] {
 		let comp1 = Computer.init(name: "Comp1", operationSystem: "Windows 10", state: .online)
@@ -55,6 +54,7 @@ protocol ComputersViewModelProtocol {
 }
 
 class ComputersViewModel: ComputersViewModelProtocol {
+	static let indent: UInt = 15
 	lazy var globalSectionModel: GlobalSection = {
 		return GlobalSection.init(withOrganizationSections: ComputersSectionGenerator.sections)
 	}()
@@ -78,20 +78,25 @@ class TestViewController_1: UIViewController,
 		print("Visible items = \(model.globalSectionModel.visibleSubItemsCount)")
 		print("All subitems = \(model.globalSectionModel.subItemsCount)")
 		
-//		print(model.globalSectionModel)
-		
-//		print(model.globalSectionModel.allSubitems)
-		
-//		print(model.sections[0].expandedSubItemsCount)
-//		print(model.sections[0].subItemsCount)
-//		print(model.sections[1].subItemsCount)
 		FrameworkPrinter.printMain("TestViewConttroller_1 did load")
+		
+		tableView.register(UINib(nibName: "ExpandableViewCell", bundle: nil), forCellReuseIdentifier: "ExpandableViewCell")
     }
 	
 	// MARK: - UITableViewDelegate
 	
 	func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-		return 0
+		return model.globalSectionModel.visibleSubItemsCount
+	}
+	
+	func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+		let cell = tableView.cellForRow(at: indexPath)
+		
+		var cellModel = model.globalSectionModel.visibleSubItems[indexPath.row]
+		cellModel.isExpanded = !cellModel.isExpanded
+		
+		cell?.setSelected(false, animated: true)
+		tableView.reloadData()
 	}
 	
 	// MARK: - UITableViewDataSource
@@ -101,6 +106,16 @@ class TestViewController_1: UIViewController,
 	}
 	
 	func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-		return UITableViewCell.init()
+		let cell = tableView.dequeueReusableCell(withIdentifier: "ExpandableViewCell", for: indexPath) as! ExpandableViewCell
+		let cellModel = model.globalSectionModel.visibleSubItems[indexPath.row]
+		cell.label.text = cellModel.name
+		cell.indentConstraint.constant = CGFloat(ComputersViewModel.indent * cellModel.indentMultiplier)
+		if let _ = cellModel as? OrganizationSection {
+			cell.backgroundColor = .gray
+		} else {
+			cell.backgroundColor = .white
+		}
+		
+		return cell
 	}
 }

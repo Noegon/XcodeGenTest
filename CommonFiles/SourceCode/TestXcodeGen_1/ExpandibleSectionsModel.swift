@@ -13,16 +13,19 @@ import UIKit
 protocol Expandible {
 	var isExpandible: Bool { get }
 	var isExpanded: Bool { get set }
-	var isVisible: Bool { get set }
+	var isVisible: Bool { get }
 	var expandedSubItemsCount: Int { get }
 	var visibleSubItemsCount: Int { get }
+	var indentMultiplier: UInt { get set }
+	
+	func setParentVisible(_ isVisible: Bool, andExpanded isExpanded: Bool)
 }
 
 protocol SubItemsCountable {
 	var subItemsCount: Int { get }
 }
 
-protocol SectionProtocol: Expandible, SubItemsCountable {
+protocol SectionProtocol: AnyObject, Expandible, SubItemsCountable {
 	var name: String { get }
 	var subsections: [SectionProtocol] { get }
 }
@@ -39,54 +42,80 @@ extension SectionProtocol {
 		return allSubitems.count
 	}
 	
-	var expandedSubItemsCount: Int {
+	var expandedSubItems: [SectionProtocol] {
 		return allSubitems
-			.filter({ $0.isExpanded && $0.isVisible })
-			.count
+			.filter({ $0.isExpanded })
+	}
+	
+	var expandedSubItemsCount: Int {
+		return expandedSubItems.count
+	}
+	
+	var visibleSubItems: [SectionProtocol] {
+		return allSubitems
+			.filter({ $0.isVisible })
 	}
 	
 	var visibleSubItemsCount: Int {
-		return allSubitems
-			.filter({ $0.isVisible })
-			.count
+		return visibleSubItems.count
 	}
 }
 
-struct ComputerSection: SectionProtocol {
+class ComputerSection: SectionProtocol {
+	var indentMultiplier: UInt = 0
 	let name: String
-	var isVisible: Bool
 	let subsections: [SectionProtocol] = []
 	let isExpandible: Bool = false
-	var isExpanded: Bool {
+	var isExpanded: Bool
+	{
 		get {
 			return true
 		}
 		set {}
 	}
 	
-	init(withComputer computer: Computer, isVisible: Bool = false) {
+	private var isParentVisibleAndExpanded: Bool = true
+	var isVisible: Bool {
+		return isParentVisibleAndExpanded
+	}
+	
+	func setParentVisible(_ isVisible: Bool, andExpanded isExpanded: Bool) {
+		self.isParentVisibleAndExpanded = isVisible && isExpanded
+		for i in 0..<subsections.count {
+			subsections[i].setParentVisible(self.isVisible, andExpanded: self.isExpanded)
+		}
+	}
+	
+	init(withComputer computer: Computer) {
 		self.name = computer.name
-		self.isVisible = isVisible
 	}
 }
 
-struct AgentGroupSection: SectionProtocol {
+class AgentGroupSection: SectionProtocol {
+	var indentMultiplier: UInt = 0
 	let name: String
-	var isVisible: Bool = false
-//	{
-//		didSet {
-//			for i in 0..<subsections.count {
-//				subsections[i].isVisible = isVisible
-//			}
-//		}
-//	}
+
 	private(set) var subsections: [SectionProtocol]
 	let isExpandible: Bool = true
-	var isExpanded: Bool {
+	var isExpanded: Bool
+	{
 		didSet {
 			for i in 0..<subsections.count {
-				subsections[i].isVisible = isExpanded
+				subsections[i].setParentVisible(self.isVisible, andExpanded: self.isExpanded)
+				subsections[i].indentMultiplier = self.indentMultiplier + 1
 			}
+		}
+	}
+	
+	private var isParentVisibleAndExpanded: Bool = true
+	var isVisible: Bool {
+		return isParentVisibleAndExpanded
+	}
+	
+	func setParentVisible(_ isVisible: Bool, andExpanded isExpanded: Bool) {
+		self.isParentVisibleAndExpanded = isVisible && isExpanded
+		for i in 0..<subsections.count {
+			subsections[i].setParentVisible(self.isVisible, andExpanded: self.isExpanded)
 		}
 	}
 	
@@ -97,28 +126,37 @@ struct AgentGroupSection: SectionProtocol {
 		})
 		self.isExpanded = isExpanded
 		for i in 0..<subsections.count {
-			subsections[i].isVisible = isExpanded
+			subsections[i].setParentVisible(self.isVisible, andExpanded: self.isExpanded)
+			subsections[i].indentMultiplier = self.indentMultiplier + 1
 		}
 	}
 }
 
-struct SiteSection: SectionProtocol {
+class SiteSection: SectionProtocol {
+	var indentMultiplier: UInt = 0
 	let name: String
-	var isVisible: Bool = false
-//	{
-//		didSet {
-//			for i in 0..<subsections.count {
-//				subsections[i].isVisible = isVisible
-//			}
-//		}
-//	}
+
 	private(set) var subsections: [SectionProtocol]
 	let isExpandible: Bool = true
-	var isExpanded: Bool {
+	var isExpanded: Bool
+	{
 		didSet {
 			for i in 0..<subsections.count {
-				subsections[i].isVisible = isExpanded
+				subsections[i].setParentVisible(self.isVisible, andExpanded: self.isExpanded)
+				subsections[i].indentMultiplier = self.indentMultiplier + 1
 			}
+		}
+	}
+	
+	private var isParentVisibleAndExpanded: Bool = true
+	var isVisible: Bool {
+		return isParentVisibleAndExpanded
+	}
+	
+	func setParentVisible(_ isVisible: Bool, andExpanded isExpanded: Bool) {
+		self.isParentVisibleAndExpanded = isVisible && isExpanded
+		for i in 0..<subsections.count {
+			subsections[i].setParentVisible(self.isVisible, andExpanded: self.isExpanded)
 		}
 	}
 	
@@ -129,28 +167,37 @@ struct SiteSection: SectionProtocol {
 		})
 		self.isExpanded = isExpanded
 		for i in 0..<subsections.count {
-			subsections[i].isVisible = isExpanded
+			subsections[i].setParentVisible(self.isVisible, andExpanded: self.isExpanded)
+			subsections[i].indentMultiplier = self.indentMultiplier + 1
 		}
 	}
 }
 
-struct OrganizationSection: SectionProtocol {
+class OrganizationSection: SectionProtocol {
+	var indentMultiplier: UInt = 0
 	let name: String
-	var isVisible: Bool = true
-//	{
-//		didSet {
-//			for i in 0..<subsections.count {
-//				subsections[i].isVisible = isVisible
-//			}
-//		}
-//	}
+
 	private(set) var subsections: [SectionProtocol]
 	let isExpandible: Bool = true
-	var isExpanded: Bool {
+	var isExpanded: Bool
+	{
 		didSet {
 			for i in 0..<subsections.count {
-				subsections[i].isVisible = isExpanded
+				subsections[i].setParentVisible(self.isVisible, andExpanded: self.isExpanded)
+				subsections[i].indentMultiplier = self.indentMultiplier + 1
 			}
+		}
+	}
+	
+	private var isParentVisibleAndExpanded: Bool = true
+	var isVisible: Bool {
+		return isParentVisibleAndExpanded
+	}
+	
+	func setParentVisible(_ isVisible: Bool, andExpanded isExpanded: Bool) {
+		self.isParentVisibleAndExpanded = isVisible && isExpanded
+		for i in 0..<subsections.count {
+			subsections[i].setParentVisible(self.isVisible, andExpanded: self.isExpanded)
 		}
 	}
 	
@@ -161,19 +208,16 @@ struct OrganizationSection: SectionProtocol {
 		})
 		self.isExpanded = isExpanded
 		for i in 0..<subsections.count {
-			subsections[i].isVisible = isExpanded
+			subsections[i].setParentVisible(self.isVisible, andExpanded: self.isExpanded)
+			subsections[i].indentMultiplier = self.indentMultiplier + 1
 		}
 	}
 }
 
-struct GlobalSection: SectionProtocol {
+class GlobalSection: SectionProtocol {
+	var indentMultiplier: UInt = 0
+	
 	let name: String = "global"
-	var isVisible: Bool {
-		get {
-			return true
-		}
-		set {}
-	}
 	private(set) var subsections: [SectionProtocol]
 	let isExpandible: Bool = false
 	var isExpanded: Bool {
@@ -183,10 +227,22 @@ struct GlobalSection: SectionProtocol {
 		set {}
 	}
 	
+	private var isParentVisibleAndExpanded: Bool = true
+	var isVisible: Bool {
+		return isParentVisibleAndExpanded
+	}
+	
+	func setParentVisible(_ isVisible: Bool, andExpanded isExpanded: Bool) {
+		self.isParentVisibleAndExpanded = isVisible && isExpanded
+		for i in 0..<subsections.count {
+			subsections[i].setParentVisible(self.isVisible, andExpanded: self.isExpanded)
+		}
+	}
+	
 	init(withOrganizationSections organizations: [OrganizationSection]) {
 		self.subsections = organizations
 		for i in 0..<subsections.count {
-			subsections[i].isVisible = isExpanded
+			subsections[i].setParentVisible(self.isVisible, andExpanded: true)
 		}
 	}
 }
