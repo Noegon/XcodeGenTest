@@ -51,14 +51,13 @@ targets:
         INFOPLIST_FILE: ${SRCROOT}/Info.plist
         CODE_SIGN_ENTITLEMENTS: ${SRCROOT}/TestXcodeGen_2.entitlements
         SWIFT_VERSION: "5.0"
+        DEVELOPMENT_TEAM: "9M22BH66EU"
       configs:
         debug:
           PRODUCT_BUNDLE_IDENTIFIER: "com.noegon.TestXcodeGen-22"
-          DEVELOPMENT_TEAM: "9M22BH66EU"
           CUSTOM_BUILD_SETTING: my_debug_value
         release:
           PRODUCT_BUNDLE_IDENTIFIER: "com.noegon.release.TestXcodeGen-22"
-          DEVELOPMENT_TEAM: "9M22BH66EU"
           CUSTOM_BUILD_SETTING: my_release_value
 
     requiresObjCLinking: true

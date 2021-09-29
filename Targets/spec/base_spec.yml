@@ -26,17 +26,15 @@ targets:
         MARKETING_VERSION: "8.8.3"
         PRODUCT_BUNDLE_IDENTIFIER: com.noegon.MyFramework
         SWIFT_VERSION: "5.0"
+        DEVELOPMENT_TEAM: "9M22BH66EU"
       configs:
         Debug:
-          DEVELOPMENT_TEAM: "9M22BH66EU"
           CODE_SIGN_IDENTITY[sdk=macosx*]: "Apple Development"
           CODE_SIGN_IDENTITY[sdk=iphoneos*]: "iPhone Developer"
         Release:
-          DEVELOPMENT_TEAM: "9M22BH66EU"
           CODE_SIGN_IDENTITY[sdk=macosx*]: "Apple Development"
           CODE_SIGN_IDENTITY[sdk=*]: "Apple Development"
         AppStore:
-          DEVELOPMENT_TEAM: "9M22BH66EU"
           CODE_SIGN_IDENTITY[sdk=macosx*]: "Apple Development"
           CODE_SIGN_IDENTITY[sdk=iphoneos*]: "iPhone Developer"
 
