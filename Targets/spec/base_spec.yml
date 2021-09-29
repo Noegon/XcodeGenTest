@@ -22,6 +22,8 @@ targets:
     settings:
       base:
         INFOPLIST_FILE: ../../../CommonResources/MyFramework/Info.plist
+        CURRENT_PROJECT_VERSION: "21092401"
+        MARKETING_VERSION: "8.8.3"
         PRODUCT_BUNDLE_IDENTIFIER: com.noegon.MyFramework
         SWIFT_VERSION: "5.0"
       configs:
@@ -45,3 +47,6 @@ targets:
 
     info:
       path: ../../../CommonResources/MyFramework/Info.plist
+      properties:
+        CFBundleVersion: $(CURRENT_PROJECT_VERSION)
+        CFBundleShortVersionString: $(MARKETING_VERSION)

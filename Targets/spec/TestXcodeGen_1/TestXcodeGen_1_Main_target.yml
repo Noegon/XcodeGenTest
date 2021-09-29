@@ -16,6 +16,8 @@ targets:
       path: ../../../Targets/TestXcodeGen_1/MainProjectData/Info.plist
       properties:
         TEST_PROPERTY: "test_1"
+        CFBundleVersion: $(CURRENT_PROJECT_VERSION)
+        CFBundleShortVersionString: $(MARKETING_VERSION)
         UISupportedInterfaceOrientations: [UIInterfaceOrientationPortrait]
         UILaunchStoryboardName: LaunchScreen
         UIApplicationSceneManifest: {
@@ -42,18 +44,22 @@ targets:
 
     settings:
       base:
+        CURRENT_PROJECT_VERSION: "21092401"
+        MARKETING_VERSION: "8.8.3"
         PRODUCT_NAME: TestXcodeGen_1
         INFOPLIST_FILE: ${SRCROOT}/Info.plist
         CODE_SIGN_ENTITLEMENTS: ${SRCROOT}/TestXcodeGen_1.entitlements
-        PRODUCT_BUNDLE_IDENTIFIER: "com.noegon.TestXcodeGen-11"
       configs:
         Debug:
+          PRODUCT_BUNDLE_IDENTIFIER: "com.noegon.TestXcodeGen-11"
           DEVELOPMENT_TEAM: "9M22BH66EU"
           CODE_SIGN_IDENTITY[sdk=iphoneos*]: "iPhone Developer"
         Release:
+          PRODUCT_BUNDLE_IDENTIFIER: "com.noegon.release.TestXcodeGen-11"
           DEVELOPMENT_TEAM: "9M22BH66EU"
           CODE_SIGN_IDENTITY[sdk=iphoneos*]: "iPhone Developer"
         AppStore:
+          PRODUCT_BUNDLE_IDENTIFIER: "com.noegon.release.TestXcodeGen-11"
           DEVELOPMENT_TEAM: "9M22BH66EU"
           CODE_SIGN_IDENTITY[sdk=iphoneos*]: "iPhone Developer"
     
