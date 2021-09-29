@@ -47,12 +47,15 @@ targets:
         CODE_SIGN_ENTITLEMENTS: ${SRCROOT}/TestXcodeGen_1.entitlements
         PRODUCT_BUNDLE_IDENTIFIER: "com.noegon.TestXcodeGen-11"
       configs:
-        debug:
+        Debug:
           DEVELOPMENT_TEAM: "9M22BH66EU"
-          CUSTOM_BUILD_SETTING: my_debug_value
-        release:
+          CODE_SIGN_IDENTITY[sdk=iphoneos*]: "iPhone Developer"
+        Release:
           DEVELOPMENT_TEAM: "9M22BH66EU"
-          CUSTOM_BUILD_SETTING: my_release_value
+          CODE_SIGN_IDENTITY[sdk=iphoneos*]: "iPhone Developer"
+        AppStore:
+          DEVELOPMENT_TEAM: "9M22BH66EU"
+          CODE_SIGN_IDENTITY[sdk=iphoneos*]: "iPhone Developer"
     
     requiresObjCLinking: true
 

@@ -5,26 +5,43 @@ options:
   postGenCommand: pod install
   usesTabs: true
 
+configs:
+  Debug: Debug
+  Release: Release
+  AppStore: Release
+
 # Independent targets, common for all projects
 targets:
+
   MyFramework:
+    name: MyFramework
     platform: iOS
     deploymentTarget: "12.0"
     type: framework
 
     settings:
-      INFOPLIST_FILE: ../../CommonResources/MyFramework/Info.plist
-      PRODUCT_BUNDLE_IDENTIFIER: com.noegon.MyFramework
+      base:
+        INFOPLIST_FILE: ../../../CommonResources/MyFramework/Info.plist
+        PRODUCT_BUNDLE_IDENTIFIER: com.noegon.MyFramework
+        SWIFT_VERSION: "5.0"
       configs:
-        debug:
+        Debug:
           DEVELOPMENT_TEAM: "9M22BH66EU"
-        release:
+          CODE_SIGN_IDENTITY[sdk=macosx*]: "Apple Development"
+          CODE_SIGN_IDENTITY[sdk=iphoneos*]: "iPhone Developer"
+        Release:
           DEVELOPMENT_TEAM: "9M22BH66EU"
+          CODE_SIGN_IDENTITY[sdk=macosx*]: "Apple Development"
+          CODE_SIGN_IDENTITY[sdk=*]: "Apple Development"
+        AppStore:
+          DEVELOPMENT_TEAM: "9M22BH66EU"
+          CODE_SIGN_IDENTITY[sdk=macosx*]: "Apple Development"
+          CODE_SIGN_IDENTITY[sdk=iphoneos*]: "iPhone Developer"
 
     sources:
-      - path: ../../CommonResources/MyFramework
+      - path: ../../../CommonResources/MyFramework
         excludes:
           - "*-Private.h"
 
     info:
-      path: ../../CommonResources/MyFramework/Info.plist
+      path: ../../../CommonResources/MyFramework/Info.plist

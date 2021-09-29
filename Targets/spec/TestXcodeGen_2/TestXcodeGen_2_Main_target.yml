@@ -8,7 +8,7 @@ targets:
     deploymentTarget: "12.0"
 
     preBuildScripts:
-      - path: ../../scripts/CodeFormatting.sh
+      - path: ../../../scripts/CodeFormatting.sh
         name: Code Formatting
         showEnvVars: true
         basedOnDependencyAnalysis: true
@@ -47,6 +47,7 @@ targets:
         INFOPLIST_FILE: ${SRCROOT}/Info.plist
         CODE_SIGN_ENTITLEMENTS: ${SRCROOT}/TestXcodeGen_2.entitlements
         PRODUCT_BUNDLE_IDENTIFIER: "com.noegon.TestXcodeGen-22"
+        SWIFT_VERSION: "5.0"
       configs:
         debug:
           DEVELOPMENT_TEAM: "9M22BH66EU"

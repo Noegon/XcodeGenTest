@@ -3,4 +3,12 @@
 brew install xcodegen
 
 cd ../
-xcodegen generate --spec Targets/spec/TestXcodeGen_1/TestXcodeGen_1.yml --project Targets/TestXcodeGen_1/MainProjectData
+cp Targets/spec/base_spec.yml Targets/TestXcodeGen_1/MainProjectData 
+cp Targets/spec/TestXcodeGen_1/TestXcodeGen_1.yml Targets/TestXcodeGen_1/MainProjectData
+cp Targets/spec/TestXcodeGen_1/TestXcodeGen_1_Main_target.yml Targets/TestXcodeGen_1/MainProjectData
+
+xcodegen generate --spec Targets/TestXcodeGen_1/MainProjectData/TestXcodeGen_1.yml --project Targets/TestXcodeGen_1/MainProjectData
+
+rm Targets/TestXcodeGen_1/MainProjectData/base_spec.yml
+rm Targets/TestXcodeGen_1/MainProjectData/TestXcodeGen_1.yml
+rm Targets/TestXcodeGen_1/MainProjectData/TestXcodeGen_1_Main_target.yml

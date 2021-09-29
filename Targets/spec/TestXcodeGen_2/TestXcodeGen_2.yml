@@ -1,7 +1,7 @@
 name: TestXcodeGen_2
 
 include:
-  - ../base_spec.yml
+  - base_spec.yml
   - TestXcodeGen_2_Main_target.yml
 
   # Swift Packages
